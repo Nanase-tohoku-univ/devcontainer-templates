@@ -1,0 +1,36 @@
+{
+    "name": "latex-devcontainer",
+    "build": {
+        "dockerfile": "../Dockerfile"
+    },
+    "remoteUser": "vscode",
+    "customizations": {
+    "vscode": {
+        "extensions": [
+            "James-Yu.latex-workshop",
+            "tomoki1207.pdf",
+            "streetsidesoftware.code-spell-checker",
+            "ICS.japanese-proofreading"
+        ],
+        "settings": {
+            "latex-workshop.latex.tools": [
+                {
+                    "name": "latexmk",
+                    "command": "latexmk",
+                    "args": ["%DOC%"]
+                }
+            ],
+            "latex-workshop.latex.recipes": [
+                { "name": "default", "tools": ["latexmk"] }
+            ]
+        }
+    }
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+        "upgradePackages": false,
+        "installZsh": true,
+        "configureZshAsDefaultShell": true
+    }
+    }
+}

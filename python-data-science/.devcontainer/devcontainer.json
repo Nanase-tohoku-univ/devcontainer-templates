@@ -1,0 +1,49 @@
+{
+    "name": "python-data-science",
+    "build": {
+        "dockerfile": "../Dockerfile"
+    },
+    "remoteUser": "vscode",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+    "mounts": [
+        "type=volume,source=uv-cache,target=/home/vscode/.cache/uv",
+        "type=volume,source=ruff-cache,target=/home/vscode/.cache/ruff"
+    ],
+
+    "postCreateCommand": "sudo chown -R vscode:vscode /opt/venv /home/vscode/.cache/uv /home/vscode/.cache/ruff && uv sync --frozen --no-install-project",
+
+    "customizations": {
+        "vscode": {
+        "extensions": [
+            "ms-python.python",
+            "ms-python.vscode-pylance",
+            "charliermarsh.ruff",
+            "ms-toolsai.jupyter",
+            "eamodio.gitlens"
+        ],
+        "settings": {
+            "python.defaultInterpreterPath": "/opt/venv/bin/python",
+
+            "[python]": {
+            "editor.defaultFormatter": "charliermarsh.ruff",
+            "editor.formatOnSave": true,
+            "editor.codeActionsOnSave": {
+                "source.fixAll": "explicit",
+                "source.organizeImports": "explicit"
+            }
+            },
+
+            "notebook.formatOnSave.enabled": true
+        }
+        }
+    },
+
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+        "upgradePackages": false,
+        "installZsh": true,
+        "configureZshAsDefaultShell": true
+        }
+    }
+}
